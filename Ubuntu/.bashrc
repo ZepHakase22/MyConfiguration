@@ -119,10 +119,24 @@ GIT_PS1_SHOWCOLORHINTS=true
 source /etc/environment
 source ~/.git-prompt.sh
 PROMPT_COMMAND='__git_ps1 "\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w" "\\[\033[00m\]\$ "'
-PATH=$PATH:./bin
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-PATH=$PATH:/home/zep/.gradle/wrapper/dists/gradle-4.1-all/bzyivzo6n839fup2jbap0tjew/gradle-4.1/bin/:/home/zep/Android/Sdk/tools:/home/zep/Android/Sdk/tools/bin:/home/zep/Android/Sdk/platform-tools:/home/zep/bin/gcc-arm-none-eabi/bin:/home/zep/bin/nrfjprog
+if [ -d "$HOME/bin" ]
+then
+  PATH="$HOME/bin:$PATH"
+fi
+# added by Anaconda3 2018.12 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/zep/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/home/zep/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/zep/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/home/zep/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_212

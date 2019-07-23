@@ -1,0 +1,14 @@
+[user]
+	name = Diego Marino Monetti
+	email = ZepHakase22@gmail.com
+[core]
+	editor = code --wait
+[color]
+	status = auto
+	branch = auto
+	interactive = auto
+
+[diff]
+    tool = default-difftool
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
