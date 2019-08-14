@@ -139,4 +139,12 @@ else
 fi
 unset __conda_setup
 # <<< conda init <<<
+if [ -d "$HOME/AWS" ]
+then
+	PATH="$HOME/AWS:$PATH"
+fi
+if [ -d "/var/www/html/magento2" ]
+then
+	PATH="/var/www/html/magento2/bin:$PATH"
+fi
 export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_212
