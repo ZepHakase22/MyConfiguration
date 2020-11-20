@@ -2,6 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -57,10 +61,11 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\e[01;92m\]\u@\h\[\e[00m\]:\[\e[01;94m\]\w\[\e[01;91m\]$(parse_git_branch) \[\e[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch) \$ '
 fi
+
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -115,10 +120,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-GIT_PS1_SHOWCOLORHINTS=true
-source /etc/environment
-source ~/.git-prompt.sh
-PROMPT_COMMAND='__git_ps1 "\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w" "\\[\033[00m\]\$ "'
 if [ -d "$HOME/bin" ]
 then
   PATH="$HOME/bin:$PATH"
@@ -147,4 +148,3 @@ if [ -d "/var/www/html/magento2" ]
 then
 	PATH="/var/www/html/magento2/bin:$PATH"
 fi
-export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_212
